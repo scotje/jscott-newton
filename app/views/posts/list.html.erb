@@ -1,0 +1,13 @@
+<h1><%= @title %></h1>
+
+<% if @posts.present? %>
+	<%= render :partial => 'post_list' %>
+<% else %>
+	<% if params[:year] %>
+		<p>There aren't any posts for that month, I was probably too busy <%= no_posts_excuse %>.</p>
+	<% elsif params[:type] %>
+		<p>Looks like I haven't written any posts of that type yet, I've probably been too busy <%= no_posts_excuse %>.</p>
+	<% else %>
+		<p>Sorry, there aren't any posts that match what you were looking for.</p>
+	<% end %>
+<% end %>

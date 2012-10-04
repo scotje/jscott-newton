@@ -1,0 +1,11 @@
+<article>
+	<header>
+		<h1><%= @page.title.split(' ')[0..-2].join(' ') %> <nobr><%= @page.title.split(' ').last %> <a href="<%= page_url(:slug => @page.slug) %>" class="permalink"><i class="icon-pushpin"></i></a></nobr></h1>
+	</header>
+			
+	<%= @page.html.html_safe %>
+			
+	<footer>
+		<time datetime="<%= @page.updated_at.getlocal %>" pubdate>Last Updated: <%= @page.updated_at.getlocal.strftime("%B %e, %Y &ndash; %l:%M %p %Z").html_safe %></time>
+	</footer>
+</article>
