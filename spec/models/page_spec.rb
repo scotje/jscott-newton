@@ -26,6 +26,12 @@ describe Page do
       should validate_format_of(:slug).not_with('Invalid Slug With Spaces!').with_message(/contains invalid characters for a page slug/)
     end
     
+    it "should validate uniqueness of page slug" do
+      page = FactoryGirl.create(:page)
+      
+      should validate_uniqueness_of(:slug)
+    end
+    
     context "published page" do
       subject do
         FactoryGirl.create(:page)
