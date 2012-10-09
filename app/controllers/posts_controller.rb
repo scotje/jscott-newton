@@ -1,12 +1,10 @@
-require 'redcarpet_jshtml5'
-
 class PostsController < ApplicationController
   caches_page :index, :show
   
   def index
     @posts = Post.published.order('published_at DESC').limit(10)
     
-    markdown = Redcarpet::Markdown.new(JSHtml5Renderer.new({:with_toc_data => true}), :no_intra_emphasis => true, :fenced_code_blocks => true, :autolink => true, :space_after_headers => true)
+    markdown = Redcarpet::Markdown.new(NewtonHtml5Renderer.new({:with_toc_data => true}), :no_intra_emphasis => true, :fenced_code_blocks => true, :autolink => true, :space_after_headers => true)
     
     @posts.each do |p|
       p.html = Redcarpet::Render::SmartyPants.render(markdown.render(p.body))
@@ -26,7 +24,7 @@ class PostsController < ApplicationController
       redirect_to :action => 'index' and return
     end
 
-    markdown = Redcarpet::Markdown.new(JSHtml5Renderer.new({:with_toc_data => true}), :no_intra_emphasis => true, :fenced_code_blocks => true, :autolink => true, :space_after_headers => true)
+    markdown = Redcarpet::Markdown.new(NewtonHtml5Renderer.new({:with_toc_data => true}), :no_intra_emphasis => true, :fenced_code_blocks => true, :autolink => true, :space_after_headers => true)
     
     @posts.each do |p|
       p.html = Redcarpet::Render::SmartyPants.render(markdown.render(p.body))
@@ -39,7 +37,7 @@ class PostsController < ApplicationController
     end
 
     if @post.present?
-      markdown = Redcarpet::Markdown.new(JSHtml5Renderer.new({:with_toc_data => true}), :no_intra_emphasis => true, :fenced_code_blocks => true, :autolink => true, :space_after_headers => true)
+      markdown = Redcarpet::Markdown.new(NewtonHtml5Renderer.new({:with_toc_data => true}), :no_intra_emphasis => true, :fenced_code_blocks => true, :autolink => true, :space_after_headers => true)
     
       @post.html = Redcarpet::Render::SmartyPants.render(markdown.render(@post.body))
     else

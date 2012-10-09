@@ -1,4 +1,4 @@
-class JSHtml5Renderer < Redcarpet::Render::XHTML
+class NewtonHtml5Renderer < Redcarpet::Render::XHTML
   def block_code(code, language)
     # Find a code block caption if present. Code block captions are a new line starting with !--.
     caption = code.match(/^!--(.*)$/)[1] rescue nil
