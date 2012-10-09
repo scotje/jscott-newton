@@ -1,11 +1,11 @@
 class Page < ActiveRecord::Base
-  attr_accessible :title, :slug, :post_type, :body
+  attr_accessible :title, :slug, :published_at, :body
   
   attr_accessor :html
 
   validates :title, :slug, :presence => true
-  validates :body, :presence => { :message => "%{value} can't be blank for published pages" }, :if => "published_at.present?"
-  validates :slug, :format => { :with => /^[a-z0-9\-]*$/, :message => "%{value} contains invalid characters for a page slug" }
+  validates :body, :presence => { :message => "can't be blank for published pages" }, :if => "published_at.present?"
+  validates :slug, :format => { :with => /^[a-z0-9\-]*$/, :message => "contains invalid characters for a page slug" }
   validates :slug, :uniqueness => true
   
   scope :draft, where('published_at IS NULL')
