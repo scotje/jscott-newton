@@ -1,15 +1,9 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the PostsHelper. For example:
-#
-# describe PostsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       helper.concat_strings("this","that").should == "this that"
-#     end
-#   end
-# end
 describe PostsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "no_posts_excuse" do
+    it "returns a string" do
+      helper.no_posts_excuse.should_not be_nil
+    end
+  end
 end
