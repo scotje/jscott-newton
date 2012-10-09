@@ -9,7 +9,7 @@ class PagesController < ApplicationController
     
       @page.html = Redcarpet::Render::SmartyPants.render(markdown.render(@page.body))
     else
-      render :file => "public/404.html", :status => 404, :layout => false
+      raise ActiveRecord::RecordNotFound
     end
   end
 end
