@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :setting do
     sequence(:key) { |n| "#{Faker::Lorem.words(3).join('-')}-#{n}" }
-    type 'string'
+    setting_type 'string'
     value { Faker::Lorem.words(5).join(' ') }
     system true
 

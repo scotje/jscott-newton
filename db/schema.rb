@@ -33,10 +33,10 @@ ActiveRecord::Schema.define(:version => 20120925224128) do
   end
 
   create_table "settings", :force => true do |t|
-    t.string  "key",                          :null => false
-    t.string  "type",   :default => "string", :null => false
+    t.string  "key",                                :null => false
+    t.string  "setting_type", :default => "string", :null => false
     t.string  "value"
-    t.boolean "system", :default => false,    :null => false
+    t.boolean "system",       :default => false,    :null => false
   end
 
   add_index "settings", ["key"], :name => "index_settings_on_key", :unique => true
