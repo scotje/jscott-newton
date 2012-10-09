@@ -7,5 +7,9 @@ FactoryGirl.define do
     slug { title.downcase.gsub!(/\W/, '-') }
     published_at { Time.new }
     body { Faker::Lorem.paragraphs(5).join("\n\n") }
+    
+    factory :draft_post do
+      published_at nil
+    end
   end
 end
