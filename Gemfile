@@ -13,6 +13,8 @@ group :test, :development do
   gem 'rspec-rails', '~> 2.11'
   gem 'capybara', '~> 1.1.2'
   gem 'factory_girl_rails', '~> 4.1.0'
+  gem 'database_cleaner', '~> 0.8.0'
+  gem 'faker', '~> 1.1.2'
 end
 
 # Gems used only for assets and not required
