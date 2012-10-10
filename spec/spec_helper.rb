@@ -39,10 +39,12 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   
-  # Database Cleaner
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean
+    
+    # Disabled AR observers and sweepers, we will re-enable them individually as needed.
+    ActiveRecord::Base.observers.disable :all
   end
 
   config.before(:each) do
