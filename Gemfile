@@ -18,6 +18,10 @@ group :test, :development do
   gem 'faker', '~> 1.1.2'
 end
 
+group :test do
+  gem 'simplecov', '~> 0.6.4', :require => false
+end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
