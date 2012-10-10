@@ -5,7 +5,7 @@ module Admin::BaseHelper
       ['Link', 'link'],
       ['Prose', 'prose'],
       ['Picture', 'picture'],
-      ['Video', 'video']
+      ['Video', 'video'],
     ]
   end
   
