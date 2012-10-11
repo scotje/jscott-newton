@@ -5,11 +5,18 @@ FactoryGirl.define do
     post_type 'prose'
     title { Faker::Lorem.words(7).join(' ').titleize }
     slug { title.downcase.gsub!(/\W/, '-') }
-    published_at { Time.new }
     body { Faker::Lorem.paragraphs(5).join("\n\n") }
     
-    factory :draft_post do
+    trait :published do
+      published_at { Time.new + Random.rand(-15..15).days }
+    end
+    
+    trait :draft do
       published_at nil
+    end
+    
+    trait :invalid_slug do
+      slug "this is an INVALID post slug!"
     end
   end
 end

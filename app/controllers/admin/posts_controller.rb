@@ -8,7 +8,6 @@ class Admin::PostsController < Admin::BaseController
     else
       @posts = Post.published.order('published_at DESC')
     end
-    
   end
   
   def new
@@ -29,7 +28,6 @@ class Admin::PostsController < Admin::BaseController
     end
     
     if @post.save
-      
       if @post.published?
         redirect_to admin_posts_url
       else
@@ -88,6 +86,15 @@ class Admin::PostsController < Admin::BaseController
   end
   
   def destroy
+    @post = Post.find(params[:id])
+    
+    @post.destroy
+    
+    if @post.published?
+      redirect_to admin_posts_url
+    else
+      redirect_to admin_drafts_url
+    end
   end
   
   private

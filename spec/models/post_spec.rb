@@ -6,9 +6,9 @@ describe Post do
     it { should allow_mass_assignment_of(:slug) }
     it { should allow_mass_assignment_of(:post_type) }
     it { should allow_mass_assignment_of(:body) }
-    it { should allow_mass_assignment_of(:published_at) }
     
     it { should_not allow_mass_assignment_of(:id) }
+    it { should_not allow_mass_assignment_of(:published_at) }
     it { should_not allow_mass_assignment_of(:created_at) }
     it { should_not allow_mass_assignment_of(:updated_at) }
   end
@@ -41,7 +41,7 @@ describe Post do
     
     context "published post" do
       subject do
-        FactoryGirl.create(:post)
+        FactoryGirl.create(:post, :published)
       end
       
       it { should validate_presence_of(:body).with_message("can't be blank for published posts") }
@@ -50,8 +50,8 @@ describe Post do
   
   describe "scopes" do
     before(:each) do
-      @published_posts = FactoryGirl.create_list(:post, 5)
-      @draft_posts = FactoryGirl.create_list(:draft_post, 3)
+      @published_posts = FactoryGirl.create_list(:post, 5, :published)
+      @draft_posts = FactoryGirl.create_list(:post, 3, :draft)
     end
     
     describe ".published" do
@@ -136,8 +136,8 @@ describe Post do
   
   describe ".published?" do
     before(:each) do
-      @post = FactoryGirl.create(:post)
-      @draft = FactoryGirl.create(:draft_post)
+      @post = FactoryGirl.create(:post, :published)
+      @draft = FactoryGirl.create(:post, :draft)
     end
     
     it "should return true for a published post" do

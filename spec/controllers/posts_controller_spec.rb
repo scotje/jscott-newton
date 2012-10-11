@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PostsController do
   before(:each) do 
-    @posts = FactoryGirl.create_list(:post, 8)
+    @posts = FactoryGirl.create_list(:post, 8, :published)
   end
 
   describe PostsController, '#index' do
@@ -22,7 +22,7 @@ describe PostsController do
     end
     
     it "should not collect draft posts" do
-      FactoryGirl.create(:draft_post)
+      FactoryGirl.create(:post, :draft)
       get :index
       
       assigns(:posts).length.should eq(@posts.length)
@@ -49,7 +49,7 @@ describe PostsController do
     
     context "type archive" do
       before(:each) do
-        @picture_posts = FactoryGirl.create_list(:post, 2, :post_type => 'picture')
+        @picture_posts = FactoryGirl.create_list(:post, 2, :published, :post_type => 'picture')
         get :list, :type => 'picture'
       end
       
@@ -64,21 +64,28 @@ describe PostsController do
   end
   
   describe PostsController, '#show' do
-    let(:post) { Post.published.first }
-    
     context "for a published post" do
       before(:each) do
-        get :show, :year => post.published_at.year, :month => post.published_at.month, :slug => post.slug
+        @post = FactoryGirl.create(:post, :published)
+        get :show, :year => @post.published_at.year, :month => @post.published_at.month.to_s.rjust(2, '0'), :slug => @post.slug
       end
       
       it { should respond_with(:success) }
       it { should assign_to(:post) }
       it { should render_template(:show) }
+      
+    end
+
+    it "should redirect to a published post even when passed a single digit value for month" do
+      @post = FactoryGirl.create(:post, :published_at => Time.local(2012,7,15))
+      get :show, :year => '2012', :month => '7', :slug => @post.slug
+      
+      should { redirect_to(post_url(@post)) }
     end
     
     context "for an unpublished post" do
       before(:each) do
-        @draft_post = FactoryGirl.create(:draft_post)
+        @draft_post = FactoryGirl.create(:post, :draft)
       end
       
       it "should raise a RecordNotFound exception" do

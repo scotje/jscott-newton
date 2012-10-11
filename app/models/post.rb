@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :title, :slug, :post_type, :body, :published_at
+  attr_accessible :title, :slug, :post_type, :body
   
   attr_accessor :html
 
