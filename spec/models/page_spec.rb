@@ -17,7 +17,7 @@ describe Page do
     it { should validate_presence_of(:slug) }
     
     it "should allow slug with a valid format" do
-      page = FactoryGirl.build(:page)
+      page = FactoryGirl.build(:page, :draft)
       page.slug = 'this-is-a-valid-slug'
       page.should be_valid
     end
@@ -27,14 +27,14 @@ describe Page do
     end
     
     it "should validate uniqueness of page slug" do
-      page = FactoryGirl.create(:page)
+      page = FactoryGirl.create(:page, :draft)
       
       should validate_uniqueness_of(:slug)
     end
     
     context "published page" do
       subject do
-        FactoryGirl.create(:page)
+        FactoryGirl.create(:page, :published)
       end
       
       it { should validate_presence_of(:body).with_message(/can't be blank for published pages/) }
@@ -43,8 +43,8 @@ describe Page do
   
   describe "scopes" do
     before(:each) do
-      @published_pages = FactoryGirl.create_list(:page, 5)
-      @draft_pages = FactoryGirl.create_list(:draft_page, 3)
+      @published_pages = FactoryGirl.create_list(:page, 5, :published)
+      @draft_pages = FactoryGirl.create_list(:page, 3, :draft)
     end
     
     describe ".published" do
@@ -98,8 +98,8 @@ describe Page do
   
   describe ".published?" do
     before(:each) do
-      @page = FactoryGirl.create(:page)
-      @draft = FactoryGirl.create(:draft_page)
+      @page = FactoryGirl.create(:page, :published)
+      @draft = FactoryGirl.create(:page, :draft)
     end
     
     it "should return true for a published page" do

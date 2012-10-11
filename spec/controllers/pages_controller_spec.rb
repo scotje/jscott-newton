@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe PagesController do
   before(:each) do
-    @page = FactoryGirl.create(:page)
-    @draft_page = FactoryGirl.create(:draft_page)
+    @page = FactoryGirl.create(:page, :published)
+    @draft_page = FactoryGirl.create(:page, :draft)
   end
   
   describe PagesController, '#show' do
