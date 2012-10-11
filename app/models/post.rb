@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
   scope :draft, where('published_at IS NULL')
   scope :published, where('published_at IS NOT NULL')
 
-  scope :published_in_year_and_month, lambda { |year, month| where("published_at IS NOT NULL AND published_at BETWEEN datetime('#{year}-#{"%02d" % month}-01 00:00:00') AND datetime('#{year}-#{"%02d" % month}-01 00:00:00','start of month','+1 month','-0.001 second')") }
+  scope :published_in_year_and_month, lambda { |year, month| where("published_at IS NOT NULL AND published_at BETWEEN datetime('#{year}-#{"%02d" % month.to_i}-01 00:00:00') AND datetime('#{year}-#{"%02d" % month.to_i}-01 00:00:00','start of month','+1 month','-0.001 second')") }
   
   def published?
     self.published_at.present?
