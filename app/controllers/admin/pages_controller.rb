@@ -61,12 +61,15 @@ class Admin::PagesController < Admin::BaseController
       end
     else
       @page.published_at = @page.published_at_was if @page.published_at_changed?
-      flash[:post] = @page
+      flash[:page] = @page
 
       redirect_to edit_admin_page_url(@page)
     end
   end
   
   def destroy
+    Page.destroy(params[:id])
+    
+    redirect_to admin_pages_url
   end
 end
