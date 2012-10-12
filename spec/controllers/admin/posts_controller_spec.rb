@@ -114,6 +114,12 @@ describe Admin::PostsController do
     end
     
     context "with valid attributes" do
+      it "should create a new Post record" do
+        expect {
+          post :create, :post => @valid_post_attributes, :resource_action => 'publish'
+        }.to change(Post, :count).by(1)
+      end
+
       it "should redirect to posts/index if the post was published" do
         post :create, :post => @valid_post_attributes, :resource_action => 'publish'
         
@@ -128,20 +134,30 @@ describe Admin::PostsController do
     end
     
     context "with invalid attributes" do
-      before(:each) do
-        post :create, :post => @invalid_post_attributes, :resource_action => 'publish'
+      it "should not create a new Post record" do
+        expect {
+          post :create, :page => @invalid_post_attributes, :resource_action => 'publish'
+        }.to_not change(Post, :count)
       end
       
       it "should unset published_at attribute of @post" do
+        post :create, :post => @invalid_post_attributes, :resource_action => 'publish'
+
         assigns(:post).published_at.should be_nil
       end
       
       it "should put the invalid @post object into the flash" do
+        post :create, :post => @invalid_post_attributes, :resource_action => 'publish'
+
         flash[:post].should_not be_nil
         flash[:post][:title].should eq(@invalid_post_attributes[:title])
       end
       
-      it { should redirect_to(new_admin_draft_url) }
+      it "should redirect to new_admin_draft_url" do
+        post :create, :post => @invalid_post_attributes, :resource_action => 'publish'
+        
+        should redirect_to(new_admin_draft_url)
+      end
     end
   end
   
@@ -222,6 +238,13 @@ describe Admin::PostsController do
     end
 
     context "with valid attributes" do
+      it "should update the attributes of the post" do
+        put :update, :id => @published_post.id, :post => @valid_post_attributes, :resource_action => 'save'
+        
+        @published_post.reload
+        @published_post.title.should eq(@valid_post_attributes[:title])
+      end
+      
       context "updating published post" do
         before(:each) do
           put :update, :id => @published_post.id, :post => @valid_post_attributes, :resource_action => 'save'
@@ -248,6 +271,13 @@ describe Admin::PostsController do
     end
     
     context "with invalid attributes" do
+      it "should not alter the given post's attributes" do
+        put :update, :id => @draft_post.id, :post => @invalid_post_attributes, :resource_action => 'save'
+        
+        @draft_post.reload
+        @draft_post.title.should_not eq(@invalid_post_attributes[:title])
+      end
+
       it "should revert any changes to published_at" do
         put :update, :id => @draft_post.id, :post => @invalid_post_attributes, :resource_action => 'publish'
         
