@@ -3,12 +3,6 @@ class PostsController < ApplicationController
   
   def index
     @posts = Post.published.order('published_at DESC').limit(10)
-    
-    markdown = Redcarpet::Markdown.new(NewtonHtml5Renderer.new({:with_toc_data => true}), :no_intra_emphasis => true, :fenced_code_blocks => true, :autolink => true, :space_after_headers => true)
-    
-    @posts.each do |p|
-      p.html = Redcarpet::Render::SmartyPants.render(markdown.render(p.body))
-    end
   end
   
   def list
@@ -23,12 +17,6 @@ class PostsController < ApplicationController
     else
       redirect_to :action => 'index' and return
     end
-
-    markdown = Redcarpet::Markdown.new(NewtonHtml5Renderer.new({:with_toc_data => true}), :no_intra_emphasis => true, :fenced_code_blocks => true, :autolink => true, :space_after_headers => true)
-    
-    @posts.each do |p|
-      p.html = Redcarpet::Render::SmartyPants.render(markdown.render(p.body))
-    end
   end
   
   def show
@@ -40,10 +28,6 @@ class PostsController < ApplicationController
       if params[:month].length == 1
         redirect_to(post_url(:year => @post.published_at.year, :month => @post.published_at.month.to_s.rjust(2, '0'), :slug => @post.slug), :status => :moved_permanently) and return
       end
-
-      markdown = Redcarpet::Markdown.new(NewtonHtml5Renderer.new({:with_toc_data => true}), :no_intra_emphasis => true, :fenced_code_blocks => true, :autolink => true, :space_after_headers => true)
-    
-      @post.html = Redcarpet::Render::SmartyPants.render(markdown.render(@post.body))
     else
       raise ActiveRecord::RecordNotFound
     end

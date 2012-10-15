@@ -1,8 +1,6 @@
 class Post < ActiveRecord::Base
   attr_accessible :title, :slug, :post_type, :body
   
-  attr_accessor :html
-
   validates :title, :slug, :post_type, :presence => true
   validates :body, :presence => { :message => "can't be blank for published posts" }, :if => "published_at.present?"
   validates :slug, :format => { :with => /^[a-z0-9\-]*$/, :message => "contains invalid characters for a post slug" }
@@ -15,5 +13,9 @@ class Post < ActiveRecord::Base
   
   def published?
     self.published_at.present?
+  end
+  
+  def html
+    @_html ||= Redcarpet::Render::SmartyPants.render(MD_PARSER.render(self.body))
   end
 end

@@ -1,8 +1,6 @@
 class Page < ActiveRecord::Base
   attr_accessible :title, :slug, :published_at, :body
   
-  attr_accessor :html
-
   validates :title, :slug, :presence => true
   validates :body, :presence => { :message => "can't be blank for published pages" }, :if => "published_at.present?"
   validates :slug, :format => { :with => /^[a-z0-9\-]*$/, :message => "contains invalid characters for a page slug" }
@@ -13,5 +11,9 @@ class Page < ActiveRecord::Base
 
   def published?
     self.published_at.present?
+  end
+  
+  def html
+    @_html ||= Redcarpet::Render::SmartyPants.render(MD_PARSER.render(self.body))
   end
 end
