@@ -1,6 +1,6 @@
 class NewtonHtml5Renderer < Redcarpet::Render::XHTML
   def block_code(code, language)
-    # Find a code block caption if present. Code block captions are a new line starting with !--.
+    # Find a code block caption if present. Code block captions are a new line starting with "!--".
     caption = code.match(/^!--(.*)$/)[1] rescue nil
     code.gsub!(/^!--.*$/, '')
 
@@ -17,7 +17,7 @@ class NewtonHtml5Renderer < Redcarpet::Render::XHTML
   end
   
   def block_quote(quote)
-    # Find a quote attribution if present and remove it from quote.
+    # Find a quote attribution if present and remove it from quote. Attribution is a standalone line at the end starting with "--".
     attrib = quote.match(/^<p>--(.*)<\/p>$/)[1] rescue nil
     quote.gsub!(/^<p>--.*$/, '')
     
