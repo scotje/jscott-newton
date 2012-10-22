@@ -19,3 +19,5 @@ pickle-email-*.html
 /doc/rspec*
 .rvmrc
 coverage
+/public/*.html
+/public/**/*.html

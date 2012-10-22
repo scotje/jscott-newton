@@ -1,4 +1,5 @@
 class Admin::PagesController < Admin::BaseController
+  cache_sweeper :page_sweeper, :only => [ :update, :destroy ]
 
   def index
     @pages = Page.order('title ASC')
