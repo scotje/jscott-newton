@@ -91,9 +91,14 @@ class Admin::PostsController < Admin::BaseController
     @post.destroy
     
     if @post.published?
-      redirect_to admin_posts_url
+      destination = admin_posts_url
     else
-      redirect_to admin_drafts_url
+      destination = admin_drafts_url
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to destination }
+      format.json { render :json => { :success => true, :redirect_to => destination } }
     end
   end
   

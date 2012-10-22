@@ -329,19 +329,39 @@ describe Admin::PostsController do
     end
 
     context "destroying published post" do
-      before(:each) do
-        delete :destroy, :id => @published_post.id
+      it "should return a JSON response with admin_posts_url for an AJAX request" do
+        delete :destroy, :format => :json, :id => @published_post.id
+
+        response.should be_success
+        body = JSON.parse(response.body)
+        body.should include('success')
+        body.should include('redirect_to')
+        body['redirect_to'].should eq(admin_posts_url)
       end
-      
-      it { should redirect_to(admin_posts_url) }
+
+      it "should redirect to admin_posts_url for a normal request" do
+        delete :destroy, :id => @published_post.id
+        
+        should redirect_to(admin_posts_url)
+      end
     end
     
     context "destroying draft post" do
-      before(:each) do
-        delete :destroy, :id => @draft_post.id
+      it "should return a JSON response with admin_drafts_url for an AJAX request" do
+        delete :destroy, :format => :json, :id => @draft_post.id
+
+        response.should be_success
+        body = JSON.parse(response.body)
+        body.should include('success')
+        body.should include('redirect_to')
+        body['redirect_to'].should eq(admin_drafts_url)
       end
 
-      it { should redirect_to(admin_drafts_url) }
+      it "should redirect to admin_posts_url for a normal request" do
+        delete :destroy, :id => @draft_post.id
+        
+        should redirect_to(admin_drafts_url)
+      end
     end
   end  
 end

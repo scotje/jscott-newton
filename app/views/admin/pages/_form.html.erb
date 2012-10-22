@@ -58,4 +58,8 @@
 		<input data-action="save" type="button" value="Save as Draft" />
 		<input data-action="save_and_publish" type="button" value="Save &amp; Publish" />
 	<% end %>
+
+	<% unless @page.new_record? %>
+		<input data-action="destroy" type="button" value="Delete" />
+	<% end %>
 </div>

@@ -54,11 +54,8 @@ class Admin::PagesController < Admin::BaseController
     
     if @page.save
       respond_to do |format|
-        format.html do
-          redirect_to admin_pages_url
-        end
-
-        format.json  { render :json => { :success => true } }
+        format.html { redirect_to admin_pages_url }
+        format.json { render :json => { :success => true } }
       end
     else
       @page.published_at = @page.published_at_was if @page.published_at_changed?
@@ -71,6 +68,9 @@ class Admin::PagesController < Admin::BaseController
   def destroy
     Page.destroy(params[:id])
     
-    redirect_to admin_pages_url
+    respond_to do |format|
+      format.html { redirect_to admin_pages_url }
+      format.json { render :json => { :success => true, :redirect_to => admin_pages_url } }
+    end
   end
 end
