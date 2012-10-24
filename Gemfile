@@ -4,6 +4,7 @@ gem 'rails', '~> 3.2.8'
 
 gem 'sqlite3', '~> 1.3.6'
 gem 'redcarpet', '~> 2.1.1'
+gem 'factory_girl_rails', '~> 4.1.0'
 
 group :development do
   gem 'thin'
@@ -12,7 +13,6 @@ end
 group :test, :development do
   gem 'rspec-rails', '~> 2.11'
   gem 'capybara', '~> 1.1.2'
-  gem 'factory_girl_rails', '~> 4.1.0'
 end
 
 group :test do
