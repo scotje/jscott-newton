@@ -14,8 +14,6 @@ class PostsController < ApplicationController
     elsif params[:type].present?
       @title = "Posts by Type: #{params[:type].capitalize}"
       @posts = Post.published.where({ :post_type => params[:type] }).order('published_at DESC').limit(10)
-    else
-      redirect_to :action => 'index' and return
     end
   end
   
