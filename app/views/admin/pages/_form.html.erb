@@ -1,0 +1,65 @@
+<%= hidden_field_tag 'resource_action', 'save' %>
+	
+<% if @page.errors.any? %>
+	<div class="errors">
+		<h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+
+		<ul>
+			<% @page.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<div id="page_meta" class="clearfix">
+	<div class="field">
+		<label style="display: block;">
+			<div class="field_label">
+				Title
+			</div>
+			
+			<div class="field_value text">
+				<%= f.text_field :title %>
+			</div>
+		</label>
+	</div>
+	
+	<div class="field">
+		<label>
+			<div class="field_label">
+				Slug
+			</div>
+			
+			<div class="field_value text">
+				<%= f.text_field :slug, 'data-validators' => 'page_slug' %>
+			</div>
+		</label>
+	</div>
+</div>
+
+
+<div id="editor_wrapper">
+	<div id="save_notice" style="display: none;">
+		<span>saved</span>
+	</div>
+
+	<%= f.hidden_field :body %>
+	<div id="editor" style="width: 100%; height: 400px; position: relative; background-color: #fff;"><%= @page.body %></div>
+</div>
+	
+<div id="page_actions" class="actions">
+	<% if @page.published? %>
+		<p>This page was published on <%= @page.published_at.getlocal.strftime('%F at %r') %>.</p>
+ 		<input data-action="save" type="button" value="Save" />
+		<input data-action="unpublish" type="button" value="Save &amp; Unpublish" />
+	<% else %>
+		<p>This page has not been published.</p>
+		<input data-action="save" type="button" value="Save as Draft" />
+		<input data-action="save_and_publish" type="button" value="Save &amp; Publish" />
+	<% end %>
+
+	<% unless @page.new_record? %>
+		<input data-action="destroy" type="button" value="Delete" />
+	<% end %>
+</div>

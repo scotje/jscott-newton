@@ -1,0 +1,31 @@
+<h1>Pages</h1>
+
+<div id="PageList" class="admin_list">
+	<table>
+		<thead>
+			<tr>
+				<th class="page_title">Title</th>
+				<th class="page_status">Status</th>
+				<th class="page_date">Created</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<% @pages.each do |p| %>
+				<tr class="page">
+					<td class="page_title"><%= link_to(p.title, edit_admin_page_url(p)) %></td>
+					<td class="page_status"><%= p.published? ? 'Published' : 'Draft' %></td>
+					<td class="page_date"><%= p.created_at.getlocal.strftime('<span title="%c">%F</span>').html_safe %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	
+	<% if @pages.blank? %>
+		<p>You currently don't have any pages.</p>
+	<% end %>
+
+	<div class="actions">
+		<%= link_to('New Page', new_admin_page_url, :class => 'button') %>
+	</div>
+</div>

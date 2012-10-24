@@ -1,0 +1,123 @@
+#PostList, #PageList {
+	table {
+		thead {
+			tr {
+				th.post_title, th.page_title {
+					width: 60%;
+					text-align: left;
+				}
+				
+				th.post_type, th.post_date,
+				th.page_status, th.page_date {
+					width: 20%;
+				}
+			}
+		}
+		
+		tbody {
+			tr {
+				td.post_title, td.page_title {
+				}
+				
+				td.post_type, td.post_date,
+				td.page_status, td.page_date {
+					text-align: center;
+				}
+			}
+		}
+	}
+}
+
+#PostForm, #PageForm, #ResourcePreview {
+	float: left;
+	box-sizing: border-box;
+
+	padding: 15px 0;
+}
+
+#PostForm, #PageForm {
+	width: 60%;
+	padding-right: 20px;
+
+	#post_meta, #page_meta {
+		.field {
+			padding-bottom: 10px;
+
+			label {
+				display: block;
+			}
+
+			.field_label {
+				font: italic normal 14px/14px $admin_font;
+				padding: 0 0 3px 0;
+			}
+
+			.field_value {
+				input[type=text], textarea {
+					width: 100%;
+					padding: 4px;
+					border: 1px solid #00f;
+
+					font: normal normal 18px/18px $admin_font;
+				}
+
+				input[type=text]:focus, textarea:focus {
+					outline: none;
+					border-color: #00f;
+				}
+
+				select {
+					width: 100%;
+				}
+
+				select:focus {
+					outline: none;
+				}
+			}
+			
+			.field_value.date {
+				select {
+					width: auto;
+				}
+			}
+		}
+
+		.field.half {
+			float: left;
+			width: 50%;
+		}
+		
+		.field.full {
+			clear: both;
+		}
+	}
+
+	#editor_wrapper {
+		position: relative;
+		margin: 5px 0 0 0;
+		padding: 20px 0 0 0;
+		
+		#save_notice {
+			position: absolute;
+			top: 0;
+			right: 2px;
+			
+			text-align: right;
+			font-size: 14px;
+		}
+	}
+}
+
+#ResourcePreview {
+	width: 40%;
+	padding-left: 20px;
+
+	h2 {
+		margin: 0;
+		padding: 0 0 2px 0;
+
+		font: italic normal 18px/18px $admin_font;
+
+		border-bottom: 1px solid #00f;
+	}
+}

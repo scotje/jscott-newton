@@ -1,0 +1,55 @@
+<p class="help">
+	Settings are available to your templates through the <span class="code">@settings</span> hash. Settings are 
+	nested into hashes by splitting the key on the period (dot) character. System settings 
+	(denoted below with the grey background) are in <span class="code">@settings[:system]</span> and any custom
+	settings you add will be in <span class="code">@settings[:user]</span>.
+</p>
+
+<p class="help">
+	So, for example, your admin username has the key "admin.user" and since it is a system 
+	setting it will be available to your templates as <span class="code">@settings[:system][:admin][:user]</span>.
+</p>
+
+
+<div id="SettingList" class="admin_list">
+	<%= form_tag(admin_settings_url, :method => :put) do |f| %>
+
+	<table>
+		<thead>
+			<tr>
+				<th class="setting_key">Key</th>
+				<th class="setting_value">Value</th>
+				<th class="setting_action"></th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<% @settings.each do |s| %>
+				<%= fields_for "settings[#{s.id}]", s do |fs| %>
+					<tr class="setting <%= s.system ? 'system' : 'user' %>_setting">
+						<td class="setting_key"><%= s.key %></td>
+						<td class="setting_value">
+							<%= fs.text_field :value %>
+						</td>
+						<td class="setting_action">
+							<% unless s.system %>
+								<%= link_to('Delete', admin_setting_url(s), :method => :delete, :confirm => "Are you sure you want to delete this setting?") %>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+			<% end %>
+		</tbody>
+	</table>
+
+	<% if @settings.blank? %>
+		<p>You currently don't have any settings.</p>
+	<% end %>
+	
+	<div class="actions">
+		<input type="submit" value="Save Changes" />
+		<%= link_to('New Setting', new_admin_setting_url, :class => 'button') %>
+	</div>
+	
+	<% end %>
+</div>

@@ -1,0 +1,50 @@
+<h2>New Setting</h2>
+
+<% if @setting.errors.any? %>
+	<div class="errors">
+		<h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+
+		<ul>
+			<% @setting.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+
+<%= form_for([:admin, @setting]) do |f| %>
+	<div id="setting_form" class="clearfix">
+		<div class="field">
+			<label style="display: block;">
+				<div class="field_label">
+					Key
+				</div>
+			
+				<div class="field_value text">
+					<%= f.text_field :key %>
+				</div>
+			</label>
+
+			<p class="legend">Key can only contain lower case letters, numbers, periods, hyphens, and underscores. No whitespace.</p>
+		</div>
+	
+		<div class="field">
+			<label style="display: block;">
+				<div class="field_label">
+					Value
+				</div>
+			
+				<div class="field_value text">
+					<%= f.text_field :value %>
+				</div>
+			</label>
+		</div>
+	
+	</div>
+
+	<div id="setting_actions" class="actions">
+ 		<input type="submit" value="Save" />
+		<%= link_to('Cancel', admin_settings_url, :class => 'button') %>
+	</div>	
+<% end %>

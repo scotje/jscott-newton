@@ -1,0 +1,44 @@
+<% if @for_drafts %>
+	<h1>Drafts</h1>
+<% else %>
+	<h1>Posts</h1>
+<% end %>
+
+<div id="PostList" class="admin_list">
+	<table>
+		<thead>
+			<tr>
+				<th class="post_title">Title</th>
+				<th class="post_type">Type</th>
+				<% if @for_drafts %>
+					<th class="post_date">Created</th>
+				<% else %>
+					<th class="post_date">Published</th>
+				<% end %>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<% @posts.each do |p| %>
+				<tr class="post">
+					<td class="post_title"><%= link_to(p.title, p.published? ? edit_admin_post_url(p) : edit_admin_draft_url(p)) %></td>
+					<td class="post_type"><%= p.post_type.capitalize %></td>
+					<td class="post_date"><%= (p.published? ? p.published_at : p.created_at).getlocal.strftime('<span title="%c">%F</span>').html_safe %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	
+	<% if @posts.blank? %>
+		<% if @for_drafts %>
+			<p>You currently don't have any draft posts.</p>
+		<% else %>
+			<p>You currently don't have any published posts.</p>
+		<% end %>
+	<% end %>
+
+	<div class="actions">
+		<%= link_to('New Draft', new_admin_draft_url, :class => 'button') %>
+	</div>
+	
+</div>

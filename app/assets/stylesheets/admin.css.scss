@@ -1,0 +1,116 @@
+/*
+*= require_tree ./external
+*= require_self
+*= require_tree ./admin/_custom
+*/
+
+@import 'fonts_colors', 'layout';
+@import 'admin/admin_list_table', 'admin/posts', 'admin/pages', 'admin/comments', 'admin/settings';
+
+body.admin {
+	aside {
+		width: 10%;
+		
+		
+		nav[role=admin] {
+			ul {
+				li {
+					text-align: center;
+					font-size: 36px;
+					
+					a {
+						display: block;
+						padding: 10px;
+					}
+					
+					a:hover {
+						text-decoration: none;
+					}
+				}
+				
+				li.active {
+					a {
+						color: #000;
+					}
+				}
+				
+			}
+		}
+	}
+	
+	div[role=main] {
+		box-sizing: border-box;
+
+		width: 100%;
+		margin-left: 0;
+		margin-bottom: 38px;
+		padding: 0 2% 0 10%;
+		
+		h1 {
+		}
+		
+		p.notice, p.error {
+			border: 1px solid #000;
+			padding: 10px 15px;
+		}
+		
+		p.notice {
+			border-color: #0f0;
+		}
+		
+		p.error {
+			border-color: #f00;
+		}
+		
+		p.help {
+			width: 75%;
+			font-size: 14px;
+			
+			span.code {
+				font-family: monospace;
+			}
+		}
+
+
+		// Buttons that do things!
+		.actions {
+			padding: 10px 0;
+
+			input[type="submit"], input[type="button"], button, a.button {
+				display: inline-block;
+				margin: 0 5px 0 0;
+				padding: 8px 12px;
+
+				border: 0;
+				background-color: #00f;
+
+				font: normal normal 18px/18px $admin_font;
+				color: #fff;
+				text-decoration: none;
+			}
+
+			input[type="submit"]:hover, input[type="button"]:hover, button:hover, a.button:hover {
+				background-color: #00f;
+			}
+		}
+
+	}
+	
+	> footer {
+		position: fixed;
+		bottom: 0;
+
+		width: 100%;
+		margin: 0;
+		padding: 0;
+
+		background: #fff;
+		
+		p {
+			width: 60%;
+			margin-left: 30%;
+		}
+	}
+}
+
+@import 'responsive';

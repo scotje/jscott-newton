@@ -1,0 +1,11 @@
+<article>
+	<header>
+		<h1><%= post.title.split(' ')[0..-2].join(' ') %> <nobr><%= post.title.split(' ').last %> <a href="<%= post_url(:year => post.published_at.year, :month => post.published_at.month.to_s.rjust(2, '0'), :slug => post.slug) %>" class="permalink"><i class="icon-pushpin"></i></a></nobr></h1>
+	</header>
+			
+	<%= post.html.html_safe %>
+			
+	<footer>
+		<time datetime="<%= post.published_at.getlocal %>" pubdate><%= post.published_at.getlocal.strftime("%B %e, %Y &ndash; %l:%M %p %Z").html_safe %></time>
+	</footer>
+</article>

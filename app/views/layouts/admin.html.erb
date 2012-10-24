@@ -1,0 +1,62 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+
+	<title><%= @page_title.present? ? "#{@page_title} &mdash; admin: #{@blog_title}".html_safe : "admin: #{@blog_title.html_safe}" %></title>
+
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+
+	<%= stylesheet_link_tag "admin", :media => "all" %>
+
+	<%= javascript_include_tag "admin", "/ace/ace", "/ace/mode-markdown" %>
+	
+    <%= csrf_meta_tags %>
+</head>
+
+<body class="admin">
+	<header>
+
+	</header>
+
+	<aside>
+		<nav role="admin">
+			<ul>
+				<li class="<%= 'active' if controller.controller_name == 'posts' && !@for_drafts && controller.action_name != 'new' %>"><%= link_to(admin_posts_url, :title => "Published Posts") do %><i class="icon-bullhorn"></i><% end %></li>
+				<li class="<%= 'active' if controller.controller_name == 'posts' && @for_drafts && controller.action_name != 'new' %>"><%= link_to(admin_drafts_url, :title => "Draft Posts") do %><i class="icon-cloud"></i><% end %></li>
+				<li class="<%= 'active' if controller.controller_name == 'posts' && controller.action_name == 'new' %>"><%= link_to(new_admin_draft_url, :title => "New Post") do %><i class="icon-plus-sign"></i><% end %></li>
+				<li class="<%= 'active' if controller.controller_name == 'pages' %>"><%= link_to(admin_pages_url, :title => "Pages") do %><i class="icon-book"></i><% end %></li>
+				<li class="<%= 'active' if controller.controller_name == 'comments' %>"><%= link_to(admin_comments_url, :title => "Comments") do %><i class="icon-comments"></i><% end %></li>
+				<li class="<%= 'active' if controller.controller_name == 'settings' %>"><%= link_to(admin_settings_url, :title => "Settings") do %><i class="icon-cog"></i><% end %></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<div role="main" class="clearfix">
+		<% if @page_title.present? %>
+			<h1><%= @page_title %></h1>
+		<% end %>
+		
+		<% if flash[:notice] %>
+			<p class="notice"><%= flash[:notice] %></p>
+		<% end %>
+
+		<% if flash[:error] %>
+			<p class="error"><%= flash[:error] %></p>
+		<% end %>
+		
+		<%= yield %>
+	</div>
+
+	<footer>
+		<p class="copyright">
+			&copy; <%= Time.new.year %> &mdash; Original work licensed under a 
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" title="Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported">Creative Commons License</a>.
+		</p>
+	</footer>
+</body>
+</html>

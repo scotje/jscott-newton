@@ -1,0 +1,163 @@
+article {
+	margin-bottom: 3em;
+	
+	header {
+		h1 {
+			margin: 0 0 0.5em 0;
+		
+			font: normal normal 36px/40px $public_heading_font;
+		
+			a.permalink {
+				font-size: 16px;
+				text-decoration: none;
+			}
+		}
+	}
+	
+	p {
+		margin: 0 0 1em 0;
+		font: normal 300 17px/24px $public_body_font;
+	}
+	
+	ul {
+		margin: 0 2em 1em 2em;
+		margin-left: 2em;
+
+		padding: 0;
+		
+		li {
+			margin-left: 1em;
+			padding: 2px 0 2px 2px;
+			
+			font: normal 300 15px/20px $public_body_font;
+			list-style: none;
+		}
+		
+	    li:before {
+			display: block;
+			position: relative;
+
+			left: -1.45em;
+			top: 0;
+
+			max-width: 0px;
+			max-height: 0px;
+
+			font-family: FontAwesome;
+			font-size: 12px;
+			content: "\f054";
+			color: #000;
+	    }
+	}
+	
+	figure.quote {
+		margin: 0 2em 1em 2em;
+		padding: 0 0 0.5em 1em;
+		
+		border-left: 2px solid #000;
+		
+		blockquote {
+			margin: 0;
+			padding: 0.25em 0 0 0;
+			
+			p {
+				margin: 0.5em 0;
+				font-style: italic;
+			
+				em {
+					font-style: normal;
+				}
+			}
+		}
+		
+		blockquote:before {
+			display: block;
+			position: relative;
+
+			left: -0.8em;
+			top: -5px;
+
+			height: 0; 
+
+			content: "\201c"; 
+
+			font: italic 500%/1 $public_body_font;
+			color: #999;
+		}
+		
+		figcaption {
+			font: normal 300 115%/1 $public_body_font;
+			
+			text-align: right;
+		}
+		
+		figcaption:before {
+			content: "\2014"; 
+		}
+	}
+	
+	figure.image, figure.code {
+		margin: 0 2em 1em 2em;
+		padding: 0;
+		
+		img {
+			max-width: 100%;
+		}
+		
+		figcaption {
+			margin-top: 0.5em;
+			padding: 0.5em 0;
+			
+			border-top: 2px solid #000;
+			border-bottom: 2px solid #000;
+			
+			font: normal normal 110%/1.2 $public_heading_font;
+		}
+
+		a {
+			text-decoration: none;
+			color: #000;
+		}
+	}
+	
+	figure.code {
+		pre {
+			margin: 0;
+			
+			code {
+				font-size: 75%;
+			}
+		}
+	}
+	
+	footer {
+		border-top: 2px solid #000;
+		border-bottom: 2px solid #000;
+		
+		time {
+			display: block;
+			
+			padding: 0.5em 0;
+			
+			font: normal 500 75%/1 $public_body_font;
+			
+			text-align: center;
+		}
+		
+		time:before, time:after {
+			display: inline-block;
+			padding: 0 7px;
+			content: "\2619";
+			font-size: 21px;
+			line-height: 7px;
+		}
+		
+		time:after {
+			-moz-transform: scaleX(-1); /* Gecko */
+	        -o-transform: scaleX(-1); /* Operah */
+	        -webkit-transform: scaleX(-1); /* webkit */
+	        transform: scaleX(-1); /* standard */
+	        filter: FlipH; /* IE 6/7/8 */
+		}
+	}
+}

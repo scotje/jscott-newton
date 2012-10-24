@@ -1,0 +1,22 @@
+<div id="PostForm">
+	<%= form_for([:admin, @post], :url => { :action => 'update', :draft => !@post.published? }) do |f| %>
+		<%= render :partial => 'form', :locals => { :f => f } %>
+	<% end %>
+</div>
+
+<div id="ResourcePreview">
+	<h2>Preview</h2>
+	
+	<div id="ResourcePreview_Body"></div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+		resource_form = $('#edit_post_<%= @post.id %>');
+		resource_body_element = $('#post_body');
+
+		<% if @autosave_url %>
+			auto_save_url = '<%= @autosave_url %>';
+		<% end %>
+	});
+</script>

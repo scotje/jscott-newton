@@ -1,0 +1,116 @@
+#SettingList {
+	table {
+		thead {
+			tr {
+				th.setting_key {
+					width: 30%;
+					text-align: left;
+				}
+				
+				th.setting_value {
+					width: 50%;
+					text-align: left;
+				}
+				
+				th.setting_action {
+					width: 20%;
+				}
+			}
+		}
+		
+		tbody {
+			tr {
+				td {
+					vertical-align: middle;
+				}
+				
+				td.setting_key {
+				}
+				
+				td.setting_value {
+					input[type=text] {
+						width: 100%;
+						padding: 3px 5px;
+						
+						border: 1px solid #000;
+					}
+				}
+				
+				td.setting_action {
+					text-align: center;
+				}
+			}
+			
+			tr.system_setting {
+				td {
+					background-color: rgb(220,220,220);
+				}
+			}
+		}
+	}
+	
+	.actions {
+		margin-top: 20px;
+	}
+}
+
+#setting_form {
+	padding: 15px 0;
+	width: 60%;
+	
+	.field {
+		padding-bottom: 10px;
+
+		label {
+			display: block;
+		}
+
+		.field_label {
+			font: italic normal 14px/14px $admin_font;
+			padding: 0 0 3px 0;
+		}
+
+		.field_value {
+			input[type=text], textarea {
+				width: 100%;
+				padding: 4px;
+				border: 1px solid #00f;
+
+				font: normal normal 18px/18px $admin_font;
+			}
+
+			input[type=text]:focus, textarea:focus {
+				outline: none;
+				border-color: #00f;
+			}
+
+			select {
+				width: 100%;
+			}
+
+			select:focus {
+				outline: none;
+			}
+		}
+			
+		.field_value.date {
+			select {
+				width: auto;
+			}
+		}
+		
+		p.legend {
+			margin: 0;
+			font-size: 11px;
+		}
+	}
+
+	.field.half {
+		float: left;
+		width: 50%;
+	}
+		
+	.field.full {
+		clear: both;
+	}
+}
