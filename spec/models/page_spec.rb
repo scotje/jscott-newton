@@ -110,4 +110,15 @@ describe Page do
       @draft.published?.should be_false
     end
   end
+  
+  describe ".html" do
+    before(:each) do
+      @page = FactoryGirl.create(:page, :published)
+    end
+    
+    it "should return some HTML" do
+      first_paragraph = @page.body.split("\n\n").first
+      @page.html.should include("<p>#{first_paragraph}</p>")
+    end
+  end
 end
