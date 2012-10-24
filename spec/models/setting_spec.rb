@@ -14,22 +14,46 @@ describe Setting do
     it { should validate_presence_of(:key) }
     it { should validate_presence_of(:setting_type) }
     
-    it "should validate uniquness of setting key" do
+    it "should validate uniqueness of setting key" do
       setting = FactoryGirl.create(:setting)
       
       should validate_uniqueness_of(:key)
+    end
+    
+    it "should reject an invalid setting key" do
+      setting = FactoryGirl.build(:setting, :invalid_key)
+      
+      setting.should_not be_valid
+    end
+    
+    it "should accept a valid setting key" do
+      setting = FactoryGirl.build(:setting)
+      
+      setting.should be_valid
+    end
+    
+    it "should require a value for a system setting" do
+      setting = FactoryGirl.build(:setting, :value => '')
+      
+      setting.should_not be_valid
+    end
+    
+    it "should not require a value for a user setting" do
+      setting = FactoryGirl.build(:setting, :user_setting, :value => '')
+      
+      setting.should be_valid
     end
   end
   
   describe "scopes" do
     before(:each) do
       @system_settings = FactoryGirl.create_list(:setting, 5)
-      @user_settings = FactoryGirl.create_list(:user_setting, 3)
+      @user_settings = FactoryGirl.create_list(:setting, 3, :user_setting)
     end
     
-    describe ".system" do
+    describe ".system_only" do
       before(:each) do
-        @results = Setting.system.all
+        @results = Setting.system_only.all
       end
       
       it "should collect the correct number of system settings" do
@@ -51,9 +75,9 @@ describe Setting do
       end
     end
     
-    describe ".user" do
+    describe ".user_only" do
       before(:each) do
-        @results = Setting.user.all
+        @results = Setting.user_only.all
       end
       
       it "should collect the correct number of user settings" do

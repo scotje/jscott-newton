@@ -5,7 +5,7 @@
 */
 
 @import 'fonts_colors', 'layout';
-@import 'admin/posts', 'admin/pages', 'admin/comments', 'admin/settings';
+@import 'admin/admin_list_table', 'admin/posts', 'admin/pages', 'admin/comments', 'admin/settings';
 
 body.admin {
 	aside {
@@ -45,6 +45,31 @@ body.admin {
 		margin-left: 0;
 		margin-bottom: 38px;
 		padding: 0 2% 0 10%;
+		
+		h1 {
+		}
+		
+		p.notice, p.error {
+			border: 1px solid #000;
+			padding: 10px 15px;
+		}
+		
+		p.notice {
+			border-color: #0f0;
+		}
+		
+		p.error {
+			border-color: #f00;
+		}
+		
+		p.help {
+			width: 75%;
+			font-size: 14px;
+			
+			span.code {
+				font-family: monospace;
+			}
+		}
 
 
 		// Buttons that do things!

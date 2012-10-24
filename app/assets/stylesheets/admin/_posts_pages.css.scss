@@ -1,14 +1,7 @@
 #PostList, #PageList {
 	table {
-		width: 75%;
-		
 		thead {
 			tr {
-				th {
-					padding: 9px;
-					border-bottom: 2px solid #000;
-				}
-				
 				th.post_title, th.page_title {
 					width: 60%;
 					text-align: left;
@@ -23,12 +16,6 @@
 		
 		tbody {
 			tr {
-				td {
-					padding: 9px;
-					
-					border-bottom: 1px solid #000;
-				}
-				
 				td.post_title, td.page_title {
 				}
 				

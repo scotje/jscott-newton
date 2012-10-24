@@ -7,7 +7,9 @@ Newton::Application.routes.draw do
     resources :drafts, :controller => "posts", :draft => true
     resources :pages
     resources :comments
-    resources :settings
+    resources :settings, :except => [ :show, :edit, :update ] do
+      put 'update', :on => :collection
+    end
 
     root :to => 'posts#index'
   end
