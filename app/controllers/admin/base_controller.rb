@@ -19,6 +19,18 @@ class Admin::BaseController < ApplicationController
     end
   end
   
+  def set_blog_title
+    if Rails.env.test?
+      @blog_title = "test blog"
+    else
+      begin
+        @blog_title = @_settings[:system][:blog][:title]
+      rescue
+        raise "You need to seed your database! Run \"rake db:seed\" from the application's root folder."
+      end
+    end
+  end
+
   def load_settings
     # In the admin area, current settings are in @_settings so that they don't get stomped in the Admin::Settings controller.
     @_settings = parse_settings
