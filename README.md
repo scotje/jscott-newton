@@ -9,6 +9,11 @@ It uses an SQLite database so you don't need to have any database software insta
 It generates and caches static files of all your content on demand so your site runs
 as fast as your web server.
 
+Newton is intended to be used by developers and others with a certain level of technical
+ability and familiarity with HTML, CSS, and Rails. If you aren't comfortable forking
+a Git repository and editing some ERB files to customize the look of your blog, this 
+may not be the software for you.
+
 ## Requirements
 
 - Ruby 1.9.3 (may work with earlier versions, but not tested)
@@ -16,9 +21,9 @@ as fast as your web server.
 
 ## Installation
 
-1.  Checkout this repository (or fork and then checkout your fork):
+1.  Clone this repository (or fork and then checkout your fork, which is the recommended approach):
         
-		git checkout git://github.com/scotje/newton.git my_blog
+		git clone git://github.com/scotje/newton.git my_blog
 
 1.  Install dependencies:
 
@@ -35,4 +40,10 @@ as fast as your web server.
 
 ## Customization
 
-Documentation coming soon.
+By design, Newton ships with a very minimal fallback theme. You will definitely want to customize the look and feel.
+
+First, I highly recommend creating your own fork of this repository. This will make it easier to keep track of your customizations
+while still being easy to integrate updates to Newton into your blog. It will also make it easy for you to contribute changes
+back to the project. Assuming you already have a Github account, it couldn't be simpler to create a fork: just click that "Fork" button near
+the upper right corner of this page.
+
