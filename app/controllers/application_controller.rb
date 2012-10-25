@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   prepend_before_filter :load_settings
   before_filter :set_blog_title
   
+  prepend_view_path 'app/views/_custom'
+  
   protected
   
   def load_settings
