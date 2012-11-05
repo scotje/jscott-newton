@@ -1,7 +1,6 @@
 /*
 *= require_tree ./external
 *= require_self
-*= require_tree ./admin/_custom
 */
 
 @import 'fonts_colors', 'layout';
@@ -114,3 +113,5 @@ body.admin {
 }
 
 @import 'responsive';
+
+@import 'admin/_custom/custom';
