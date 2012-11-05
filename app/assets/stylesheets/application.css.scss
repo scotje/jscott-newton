@@ -1,7 +1,6 @@
 /*
 *= require_tree ./external
 *= require_self
-*= require_tree ./_custom
 */
 
 @import 'fonts_colors', 'layout';
@@ -9,3 +8,5 @@
 @import 'pages';
 
 @import 'responsive';
+
+@import '_custom/custom';

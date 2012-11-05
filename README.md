@@ -23,7 +23,13 @@ the look of your blog, this may not be the software for you.
 
 1.  Clone this repository (or fork and then clone your fork, which is the recommended approach):
         
+		git clone --recursive git://github.com/scotje/newton.git my_blog
+		
+	You need to do a recursive clone so that you get the Ace Editor which Newton uses for editing the source of your posts. If you have a version of Git older than 1.6.5 you will need to do this instead:
+	
 		git clone git://github.com/scotje/newton.git my_blog
+		cd my_blog
+		git submodule update --init
 
 1.  Install dependencies:
 
@@ -120,6 +126,43 @@ Here is a list of the templates you will most likely want to modify:
 - posts/_post (This partial is used for rendering an individual post, either as part of a list or by itself.)
 - pages/show (Used for rendering a page.)
 
+Here are the instance variables available to your custom templates:
+
+#### All Templates
+
+- **@settings**: A nested hash of all the system and user settings defined for your blog. See "Working With Settings" below.
+- **@blog_title**: A shortcut to the "blog.title" setting.
+
+#### Post List Templates (Index, Archive, etc.)
+
+- **@posts**: An array of posts to be shown on the page. (See "Post Show Template" below for methods avaialble on each post.)
+- **@title**: For archive pages, a description of the type of archive being shown. (Ex: "Posts by Month: July 2012")
+
+#### Post Show Template
+
+- **@post**:
+    - **.title**: Title of post, plain text.
+	- **.slug**: URL safe identifier for this post. (Usually similar to title.)
+	- **.post_type**: String indicating post type. Currently one of: 'link', 'prose', 'picture', or 'video'.
+	- **.body**: Body of post in Markdown format.
+	- **.created_at**: Timestamp of when post was first created.
+	- **.updated_at**: Timestamp of when post was last updated.
+	- **.published_at**: Timestamp of when post was first published.
+	- **.published?**: Convenience method for whether or not post is currently published. Returns boolean.
+	- **.html**: Body of post in HTML format.
+
+#### Page Show Template
+
+- **@page**:
+	- **.title**: Title of page, plain text.
+	- **.slug**: URL safe identifier for this page. (Usually similar to title.)
+	- **.body**: Body of page in Markdown format.
+	- **.created_at**: Timestamp of when page was first created.
+	- **.updated_at**: Timestamp of when page was last updated.
+	- **.published_at**: Timestamp of when page was first published.
+	- **.published?**: Convenience method for whether or not page is currently published. Returns boolean.
+	- **.html**: Body of page in HTML format.
+
 ### Customizing CSS and JavaScript
 
 CSS and JavaScript customization works slightly differently than template 
@@ -127,11 +170,19 @@ customization. Instead of completely overriding the built-in stylesheets and
 scripts, your customizations will simply be included last and thus have 
 the highest precedence.
 
-Inside the "app/assets/stylesheets" and "app/assets/javascripts" folders you 
-will find an empty folder named "_custom". Any files you place in these folders 
-(or any subfolders you create) will be included in the user facing portion of 
-your blog. Similarly, there are "_custom" folders inside of 
-"app/assets/stylesheets/admin" and "app/assets/javascripts/admin" and code 
+Inside the "app/assets/stylesheets" and "app/assets/stylesheets/admin"
+folders you will find folders named "_custom". Inside these folders you
+will find a file called "custom.css.scss". This file will be imported 
+into the public and admin stylesheets (respectively) after all built in 
+styles have already been defined. Feel free to create your own 
+stylesheets inside the "_custom" folders and import them into the 
+"custom.css.scss" file. SCSS is a "Sassy CSS" and is a superset of 
+CSS3 syntax defined by the [SASS project](http://sass-lang.com/).
+
+Inside the "app/assets/javascripts" folders you will find an empty folder 
+named "_custom". Any files you place in this folder (or any subfolders you 
+create) will be included in the user facing portion of your blog. Similarly, 
+there is a "_custom" folder inside of "app/assets/javascripts/admin" and code 
 placed there will be included in the admin portion of your blog.
 
 So if you were using the built-in templates but wanted to customize the color of 
