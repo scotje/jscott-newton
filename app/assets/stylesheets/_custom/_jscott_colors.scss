@@ -1,0 +1,29 @@
+$grey: rgb(226,227,217);
+$dark_brown: rgb(73,66,51);
+$light_blue: rgb(76,133,179);
+$dark_blue: rgb(40,99,145);
+$green: rgb(177,188,79);
+
+$pt_sans_narrow: "pt-sans-narrow-1", "pt-sans-narrow-2", sans-serif;
+$museo_slab: "museo-slab-1","museo-slab-2", serif;
+$admin_font: "Helvetica", sans-serif;
+
+a {
+	color: $dark_blue;
+	-webkit-transition: color 125ms ease-in;
+}
+		
+a:hover {
+	color: $light_blue;
+	-webkit-transition: color 125ms ease-in;
+}
+
+
+.wf-loading {
+	visibility: hidden;
+}
+ 
+.wf-active {
+	visibility: visible;
+}
+

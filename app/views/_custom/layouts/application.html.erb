@@ -1,0 +1,78 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+
+	<title><%= @page_title.present? ? "#{@page_title} &mdash; #{@blog_title}".html_safe : @blog_title.html_safe %></title>
+
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+
+	<%= stylesheet_link_tag "application", :media => "all" %>
+
+	<%= javascript_include_tag "application", "http://use.typekit.com/zay4jym.js" %>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	
+    <%= csrf_meta_tags %>
+</head>
+
+<body>
+	<header>
+
+	</header>
+
+	<aside>
+		<nav role="home">
+			<%= link_to(root_url) do %>
+				<i class="icon-home"></i>
+			<% end %>
+		</nav>
+		
+		<nav role="meta">
+			<ul>
+				<li>Hello.</li>
+				<li>My name is <%= link_to('Jesse Scott', page_url(:slug => 'about')) %>.</li>
+				<li>I <%= link_to('make websites', page_url(:slug => 'work')) %> and <%= link_to('write things', archives_by_type_url(:type => 'prose')) %>.</li>
+				<li>I live in <%= link_to('Portland, Oregon', 'http://www.travelportland.com/') %>.</li>
+				<li>I have a dog named <%= link_to('Newton', 'https://www.icloud.com/photostream/#A4JtdOXmJuvAeb') %>.</li>
+			</ul>
+		</nav>
+		
+		<nav role="meta-dynamic">
+			<ul>
+				<li>I'm learning <%= @settings[:user][:personal][:learning].html_safe %>.</li>
+				<li>I'm reading <%= @settings[:user][:personal][:reading].html_safe %>.</li>
+				<li>I'm about to watch <%= @settings[:user][:personal][:next_movie].html_safe %>.</li>
+			</ul>
+		</nav>
+		
+		<nav role="archives">
+			<ul>
+				<li>Other posts <%= link_to('this month', archives_by_month_url(:year => Time.new.year, :month => Time.new.strftime("%m"))) %>.</li>
+				<li>Archives for <%= link_to('last month', archives_by_month_url(:year => 1.month.ago.year, :month => 1.month.ago.strftime("%m"))) %>.</li>
+			</ul>
+		</nav>
+	</aside>
+
+	<div role="main">
+		<%= yield %>
+	</div>
+
+	<footer>
+		<p class="copyright">
+			&copy; <%= Time.new.year %> <%= @settings[:system][:blog][:copyright_holder] %> &mdash; Original work licensed under a 
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" title="Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported">Creative Commons (BY-NC-SA 3.0) License</a>.
+		</p>
+	</footer>
+
+	<script>
+		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>
+</body>
+</html>
