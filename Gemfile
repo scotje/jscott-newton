@@ -29,6 +29,10 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
 end
 
+group :production do
+	gem 'uglifier', "~> 1.2.3"
+end
+
 gem 'jquery-rails'
 
 # Deploy with Capistrano
