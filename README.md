@@ -176,7 +176,7 @@ will find a file called "custom.css.scss". This file will be imported
 into the public and admin stylesheets (respectively) after all built in 
 styles have already been defined. Feel free to create your own 
 stylesheets inside the "_custom" folders and import them into the 
-"custom.css.scss" file. SCSS is a "Sassy CSS" and is a superset of 
+"custom.css.scss" file. SCSS is "Sassy CSS" and is a superset of 
 CSS3 syntax defined by the [SASS project](http://sass-lang.com/).
 
 Inside the "app/assets/javascripts" folders you will find an empty folder 

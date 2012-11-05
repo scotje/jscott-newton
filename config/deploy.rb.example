@@ -1,7 +1,7 @@
-# Uncomment next 3 lines and configure version if you are using RVM on your server:
-#$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
+# Uncomment next 3 lines and configure version and install type if you are using RVM on your server:
 #require "rvm/capistrano"                  # Load RVM's capistrano plugin.
 #set :rvm_ruby_string, '1.9.3' 
+#set :rvm_type, :system
 
 require "bundler/capistrano"
 
