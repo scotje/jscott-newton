@@ -33,4 +33,7 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 # (See 'Capfile.example' and 'config/deploy.rb.example' for Capistrano deployment.)
-# gem 'capistrano'
+gem 'capistrano'
+
+# If your server uses RVM, uncomment this as well.
+gem 'rvm-capistrano'
