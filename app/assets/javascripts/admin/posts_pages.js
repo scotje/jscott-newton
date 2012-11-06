@@ -13,12 +13,23 @@ $(function() {
 		
 		updatePreview();
 	}
+	
+	$('input[type="text"].title').blur(generateSlug);
 
 	$('input[type="button"][data-action="save"]').click(save);
 	$('input[type="button"][data-action="unpublish"]').click(unpublish);
 	$('input[type="button"][data-action="save_and_publish"]').click(saveAndPublish);
 	$('input[type="button"][data-action="destroy"]').click(destroy);
 });
+
+function generateSlug(e) {
+	title_input = $(e.target);
+	slug_input = $('input[type="text"].slug').first();
+	
+	if (slug_input.val() == '') {
+		slug_input.val(title_input.val().trim().toLowerCase().replace(/\s+/g, '-').replace(/[^A-Za-z0-9\-]/g, ''));
+	}
+}
 	
 function initializeEditor(element_id) {
 	editor = ace.edit(element_id);
