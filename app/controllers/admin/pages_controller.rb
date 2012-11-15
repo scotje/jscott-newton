@@ -41,7 +41,12 @@ class Admin::PagesController < Admin::BaseController
       @autosave_url = admin_page_url(@page)
     end
   end
-  
+
+  def _preview
+    page = Page.new(:body => params[:body])
+    render :json => { :html => page.html }
+  end
+    
   def update
     @page = Page.find(params[:id])
     @page.update_attributes(params[:page])

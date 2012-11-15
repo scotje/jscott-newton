@@ -3,9 +3,16 @@ Newton::Application.routes.draw do
   # first created -> highest priority.
 
   namespace :admin do 
-    resources :posts
+    resources :posts do
+      post '_preview', :on => :collection, :as => 'preview'
+    end  
+
     resources :drafts, :controller => "posts", :draft => true
-    resources :pages
+    
+    resources :pages do
+      post '_preview', :on => :collection, :as => 'preview'
+    end
+    
     resources :comments
     resources :settings, :except => [ :show, :edit, :update ] do
       put 'update', :on => :collection

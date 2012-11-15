@@ -3,22 +3,35 @@ var resource_form;
 var resource_body_element;
 var auto_save_url = null;
 var auto_save_timer;
+var preview_url = null;
+var update_preview_timer;
 
-$(function() {
+function initNewton() {
 	if (document.getElementById('editor')) {
 		initializeEditor('editor');
 
-		//editor.getSession().on('change', updatePreview);
+		editor.getSession().on('change', beginUpdatePreview);
 		editor.getSession().on('change', beginAutoSave);
 		
 		updatePreview();
 	}
+	
+	$('input[type="text"].title').blur(generateSlug);
 
 	$('input[type="button"][data-action="save"]').click(save);
 	$('input[type="button"][data-action="unpublish"]').click(unpublish);
 	$('input[type="button"][data-action="save_and_publish"]').click(saveAndPublish);
 	$('input[type="button"][data-action="destroy"]').click(destroy);
-});
+}
+
+function generateSlug(e) {
+	title_input = $(e.target);
+	slug_input = $('input[type="text"].slug').first();
+	
+	if (slug_input.val() == '') {
+		slug_input.val(title_input.val().trim().toLowerCase().replace(/\s+/g, '-').replace(/[^A-Za-z0-9\-]/g, ''));
+	}
+}
 	
 function initializeEditor(element_id) {
 	editor = ace.edit(element_id);
@@ -28,9 +41,26 @@ function initializeEditor(element_id) {
 	editor.getSession().setMode(new MarkdownMode());
 }
 
+function beginUpdatePreview() {
+	window.clearTimeout(update_preview_timer);
+
+	update_preview_timer = window.setTimeout(updatePreview, 500);
+}	
+
 function updatePreview() {
 	if ($('#ResourcePreview_Body')) {
-		//$('#ResourcePreview_Body').html();
+		$.ajax({
+  		  url: preview_url,
+		  type: 'post',
+		  data: {
+			  'body': editor.getValue(),
+			  'authenticity_token': resource_form.find('input[type=hidden][name=authenticity_token]').first().attr('value')
+		  },
+		  dataType: 'json',
+		  success: function(data, textStatus, jqXHR) {
+			  $('#ResourcePreview_Body').html('<article>' + data.html + '</article>');
+		  }
+		});
 	}
 }
 

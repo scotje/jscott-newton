@@ -20,7 +20,7 @@
 			</div>
 			
 			<div class="field_value text">
-				<%= f.text_field :title %>
+				<%= f.text_field :title, :class => 'title' %>
 			</div>
 		</label>
 	</div>
@@ -32,7 +32,7 @@
 			</div>
 			
 			<div class="field_value text">
-				<%= f.text_field :slug, 'data-validators' => 'page_slug' %>
+				<%= f.text_field :slug, :class => 'slug', 'data-validators' => 'page_slug' %>
 			</div>
 		</label>
 	</div>
