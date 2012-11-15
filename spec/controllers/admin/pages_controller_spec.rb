@@ -169,6 +169,21 @@ describe Admin::PagesController do
       end
     end
   end
+  
+  describe Admin::PagesController, '_preview' do
+    before(:each) do
+      @valid_page_attributes = FactoryGirl.attributes_for(:page)
+    end
+    
+    it "should render HTML for the given page body" do
+      post '_preview', :body => @valid_page_attributes[:body]
+      
+      response.should be_success
+      body = JSON.parse(response.body)
+      body.should include('html')
+      body['html'].should include('<p>' + @valid_page_attributes[:body].split("\n\n").first + '</p>')
+    end
+  end
 
   describe Admin::PagesController, 'update' do
     before(:each) do

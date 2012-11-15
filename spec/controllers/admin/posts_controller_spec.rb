@@ -203,6 +203,21 @@ describe Admin::PostsController do
     end
   end
 
+  describe Admin::PostsController, '_preview' do
+    before(:each) do
+      @valid_post_attributes = FactoryGirl.attributes_for(:post)
+    end
+    
+    it "should render HTML for the given post body" do
+      post '_preview', :body => @valid_post_attributes[:body]
+      
+      response.should be_success
+      body = JSON.parse(response.body)
+      body.should include('html')
+      body['html'].should include('<p>' + @valid_post_attributes[:body].split("\n\n").first + '</p>')
+    end
+  end
+
   describe Admin::PostsController, 'update' do
     before(:each) do
       @valid_post_attributes = FactoryGirl.attributes_for(:post)

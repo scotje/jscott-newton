@@ -51,6 +51,11 @@ class Admin::PostsController < Admin::BaseController
     end
   end
   
+  def _preview
+    post = Post.new(:body => params[:body])
+    render :json => { :html => post.html }
+  end
+  
   def update
     @post = Post.find(params[:id])
     @post.update_attributes(params[:post])

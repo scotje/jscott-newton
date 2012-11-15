@@ -3,12 +3,14 @@ var resource_form;
 var resource_body_element;
 var auto_save_url = null;
 var auto_save_timer;
+var preview_url = null;
+var update_preview_timer;
 
-$(function() {
+function initNewton() {
 	if (document.getElementById('editor')) {
 		initializeEditor('editor');
 
-		//editor.getSession().on('change', updatePreview);
+		editor.getSession().on('change', beginUpdatePreview);
 		editor.getSession().on('change', beginAutoSave);
 		
 		updatePreview();
@@ -20,7 +22,7 @@ $(function() {
 	$('input[type="button"][data-action="unpublish"]').click(unpublish);
 	$('input[type="button"][data-action="save_and_publish"]').click(saveAndPublish);
 	$('input[type="button"][data-action="destroy"]').click(destroy);
-});
+}
 
 function generateSlug(e) {
 	title_input = $(e.target);
@@ -39,9 +41,26 @@ function initializeEditor(element_id) {
 	editor.getSession().setMode(new MarkdownMode());
 }
 
+function beginUpdatePreview() {
+	window.clearTimeout(update_preview_timer);
+
+	update_preview_timer = window.setTimeout(updatePreview, 500);
+}	
+
 function updatePreview() {
 	if ($('#ResourcePreview_Body')) {
-		//$('#ResourcePreview_Body').html();
+		$.ajax({
+  		  url: preview_url,
+		  type: 'post',
+		  data: {
+			  'body': editor.getValue(),
+			  'authenticity_token': resource_form.find('input[type=hidden][name=authenticity_token]').first().attr('value')
+		  },
+		  dataType: 'json',
+		  success: function(data, textStatus, jqXHR) {
+			  $('#ResourcePreview_Body').html('<article>' + data.html + '</article>');
+		  }
+		});
 	}
 }
 
