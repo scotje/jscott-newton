@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :title, :slug, :post_type, :body
+  attr_accessible :title, :slug, :post_type, :body, :published_at
   
   validates :title, :slug, :post_type, :presence => true
   validates :body, :presence => { :message => "can't be blank for published posts" }, :if => "published_at.present?"
