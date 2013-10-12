@@ -28,7 +28,7 @@ after "deploy:restart", "deploy:cleanup"
 
 
 task :symlink_db do
-  run "#{try_sudo} /bin/ln -s #{shared_path}/production.sqlite3 #{release_path}/db/production.sqlite3"
+  run "#{try_sudo} /bin/ln -sf #{shared_path}/production.sqlite3 #{release_path}/db/production.sqlite3"
 end
 
 namespace :deploy do
