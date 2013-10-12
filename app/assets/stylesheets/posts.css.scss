@@ -51,6 +51,8 @@ article {
 	}
 	
 	figure.quote {
+    position: relative;
+
 		margin: 0 2em 1em 2em;
 		padding: 0 0 0.5em 1em;
 		
@@ -72,16 +74,15 @@ article {
 		
 		blockquote:before {
 			display: block;
-			position: relative;
+			position: absolute;
 
-			left: -0.8em;
+			left: -45px;
 			top: -5px;
 
 			height: 0; 
 
 			content: "\201c"; 
 
-			font: italic 500%/1 $public_body_font;
 			color: #999;
 		}
 		
@@ -96,13 +97,22 @@ article {
 		}
 	}
 	
-	figure.image, figure.code {
-		margin: 0 2em 1em 2em;
+	figure.image, figure.code, figure.video {
+		/*margin: 0 2em 1em 2em;*/
+    margin: 0 0 1em 0;
 		padding: 0;
 		
-		img {
+		img, object, embed {
 			max-width: 100%;
 		}
+    
+    object, embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
 		
 		figcaption {
 			margin-top: 0.5em;
@@ -119,6 +129,13 @@ article {
 			color: #000;
 		}
 	}
+  
+  figure.video {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+  }
 	
 	figure.code {
 		pre {
@@ -147,17 +164,17 @@ article {
 		time:before, time:after {
 			display: inline-block;
 			padding: 0 7px;
-			content: "\2619";
-			font-size: 21px;
+			content: "\2692";
+			font-size: 16px;
 			line-height: 7px;
 		}
 		
 		time:after {
 			-moz-transform: scaleX(-1); /* Gecko */
-	        -o-transform: scaleX(-1); /* Operah */
-	        -webkit-transform: scaleX(-1); /* webkit */
-	        transform: scaleX(-1); /* standard */
-	        filter: FlipH; /* IE 6/7/8 */
+      -o-transform: scaleX(-1); /* Operah */
+      -webkit-transform: scaleX(-1); /* webkit */
+      transform: scaleX(-1); /* standard */
+      filter: FlipH; /* IE 6/7/8 */
 		}
 	}
 }

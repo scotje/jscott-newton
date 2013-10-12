@@ -13,7 +13,7 @@
 
 	<%= stylesheet_link_tag "application", :media => "all" %>
 
-    <%= csrf_meta_tags %>
+  <%= csrf_meta_tags %>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 
 	</header>
 
-	<aside>
+	<aside role="nav">
 		<nav role="home">
 			<%= link_to(root_url) do %>
 				<i class="icon-home"></i>
@@ -64,6 +64,10 @@
 			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" title="Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported">Creative Commons (BY-NC-SA 3.0) License</a>.
 		</p>
 	</footer>
+  
+  <aside role="supplemental">
+    
+  </aside>
 
 	<!-- If you want to use Google Analytics, update and uncomment the code below. -->
 	<!-- 

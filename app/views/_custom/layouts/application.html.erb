@@ -20,11 +20,7 @@
 </head>
 
 <body>
-	<header>
-
-	</header>
-
-	<aside>
+	<aside role="nav">
 		<nav role="home">
 			<%= link_to(root_url) do %>
 				<i class="icon-home"></i>
@@ -60,6 +56,11 @@
 	<div role="main">
 		<%= yield %>
 	</div>
+
+  <aside role="supplemental">
+    <div role="container">
+    </div>
+  </aside>
 
 	<footer>
 		<p class="copyright">
