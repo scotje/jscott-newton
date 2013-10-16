@@ -23,7 +23,7 @@
 
 	</header>
 
-	<aside>
+	<aside role="nav">
 		<nav role="admin">
 			<ul>
 				<li class="<%= 'active' if controller.controller_name == 'posts' && !@for_drafts && controller.action_name != 'new' %>"><%= link_to(admin_posts_url, :title => "Published Posts") do %><i class="icon-bullhorn"></i><% end %></li>
