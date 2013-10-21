@@ -1,9 +1,10 @@
-# Uncomment next 3 lines and configure version and install type if you are using RVM on your server:
-require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-set :rvm_ruby_string, '1.9.3' 
-set :rvm_type, :system
+# rbenv path
+set :default_environment, {
+  'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
+}
 
 require "bundler/capistrano"
+set :bundle_flags, "--deployment --quiet --binstubs"
 
 set :application, "js.co.tt" # You should probably change this to something more meaningful to you, but you don't have to.
 set :repository,  "git@github.com:scotje/jscott-newton.git" # This should point at your forked repo.
